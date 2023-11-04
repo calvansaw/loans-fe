@@ -1,6 +1,7 @@
 import { RouteObject, useRoutes } from "react-router-dom";
 import Layout from "../components/Layout";
 import * as URLS from "../constants/urls";
+import Login from "../components/Login";
 
 const RouteRenderer = () => {
   const children = [
@@ -18,7 +19,7 @@ const RouteRenderer = () => {
     },
     {
       path: URLS.LOGIN,
-      element: <>login</>,
+      element: <Login />,
     },
   ] as RouteObject[];
 
