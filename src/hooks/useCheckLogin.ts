@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { LOGIN } from "../constants/urls";
+import { LOGIN } from "../constants/routes";
 import moment from "moment";
 
 const useCheckLogin = () => {

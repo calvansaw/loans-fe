@@ -1,8 +1,7 @@
-export const BASE = "/";
-export const LOGIN = "/login";
-
 // Auth
 export const BASE_URL = "http://localhost:3000";
+export const BASE_API_URL =
+  "https://8snvybl28g.execute-api.ap-southeast-1.amazonaws.com/dev";
 export const DOMAIN_URL = "https://csaw.auth.ap-southeast-1.amazoncognito.com";
 export const CLIENT_ID = "7au4ti4oj44090o8uqoueins3s";
 export const REDIRECT_URL = `${BASE_URL}/login`;

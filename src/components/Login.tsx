@@ -5,10 +5,11 @@ import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
-import { AUTHORIZE_URL, BASE } from "../constants/urls";
+import { AUTHORIZE_URL } from "../constants/urls";
 import { useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { token } from "../services/auth";
+import { BASE } from "../constants/routes";
 
 const Login = () => {
   const location = useLocation();
