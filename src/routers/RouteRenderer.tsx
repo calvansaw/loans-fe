@@ -1,13 +1,14 @@
 import { RouteObject, useRoutes } from "react-router-dom";
-import Layout from "../components/Layout";
+import Layout from "../components/Layout/Layout";
 import * as URLS from "../constants/urls";
 import Login from "../components/Login";
+import Dashboard from "../components/Dashboard/Dashboard";
 
 const RouteRenderer = () => {
   const children = [
     {
       index: true,
-      element: <>loans</>,
+      element: <Dashboard />,
     },
   ];
 
