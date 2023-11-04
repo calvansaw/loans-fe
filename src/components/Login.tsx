@@ -5,8 +5,28 @@ import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
+import { AUTHORIZE_URL, BASE } from "../constants/urls";
+import { useEffect } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
+import { token } from "../services/auth";
 
 const Login = () => {
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const params = new URLSearchParams(location.search);
+    const authCode = params.get("code");
+    if (authCode) {
+      token(authCode).then((res) => {
+        localStorage.setItem("id_token", res.data.id_token);
+        localStorage.setItem("access_token", res.data.access_token);
+        localStorage.setItem("refresh_token", res.data.refresh_token);
+        navigate(BASE);
+      });
+    }
+  }, []);
+
   return (
     <>
       <Grid
@@ -53,8 +73,13 @@ const Login = () => {
           <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
             <LockOutlinedIcon />
           </Avatar>
-          <Box onSubmit={() => {}} sx={{ mt: 1 }}>
-            <Button fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}>
+          <Box sx={{ mt: 1 }}>
+            <Button
+              fullWidth
+              variant="contained"
+              sx={{ mt: 3, mb: 2 }}
+              href={AUTHORIZE_URL}
+            >
               Sign In
             </Button>
           </Box>

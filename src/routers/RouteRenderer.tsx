@@ -6,7 +6,7 @@ import Login from "../components/Login";
 const RouteRenderer = () => {
   const children = [
     {
-      path: URLS.LOANS,
+      index: true,
       element: <>loans</>,
     },
   ];
