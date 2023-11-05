@@ -1,5 +1,5 @@
 // Auth
-export const BASE_URL = "http://localhost:3000";
+export const BASE_URL = "https://d1yzfazxz5qydb.cloudfront.net";
 export const BASE_API_URL =
   "https://8snvybl28g.execute-api.ap-southeast-1.amazonaws.com/dev";
 export const DOMAIN_URL = "https://csaw.auth.ap-southeast-1.amazoncognito.com";
