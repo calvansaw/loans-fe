@@ -15,6 +15,7 @@ import { REQUEST_APPROVAL } from "../../constants/requests";
 
 interface LoansProps {
   rows?: GridRowsProp;
+  isAdmin: boolean;
 }
 
 const columns: GridColDef[] = [
@@ -116,9 +117,16 @@ const columns: GridColDef[] = [
     width: 100,
     disableColumnMenu: true,
   },
+  {
+    field: "loanId",
+    headerName: "Loan ID",
+    type: "string",
+    width: 200,
+    disableColumnMenu: true,
+  },
 ];
 
-const Loans = ({ rows = [] }: LoansProps) => {
+const Loans = ({ rows = [], isAdmin }: LoansProps) => {
   const [data, setData] = useState<LoanInterface | null>(null);
   const [index, setIndex] = useState(-1);
 
@@ -155,7 +163,7 @@ const Loans = ({ rows = [] }: LoansProps) => {
           onRowClick={handleOpen}
         />
       </Box>
-      {data && (
+      {data && !isAdmin && (
         <PaymentDialog
           open={!!data}
           handleClose={handleClose}
