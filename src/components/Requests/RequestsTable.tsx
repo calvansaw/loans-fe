@@ -206,7 +206,6 @@ const RequestsTable = ({
               },
             },
           }}
-          pageSizeOptions={[5]}
           onRowClick={isAdmin ? handleOpen : undefined}
         />
       </Box>

@@ -1,5 +1,5 @@
-import { Outlet, useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { Outlet, useLocation, useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import List from "@mui/material/List";
@@ -21,7 +21,9 @@ import { BASE, REQUESTS } from "../../constants/routes";
 const Layout = () => {
   // useCheckLogin();
   const navigate = useNavigate();
+  const location = useLocation();
   const [open, setOpen] = useState(false);
+  const [title, setTitle] = useState("Loans & Payments");
   const toggleDrawer = () => {
     setOpen(!open);
   };
@@ -29,6 +31,14 @@ const Layout = () => {
   const handleClick = (route: string) => () => {
     navigate(route);
   };
+
+  useEffect(() => {
+    if (location.pathname === REQUESTS) {
+      setTitle("Service Requests");
+    } else if (location.pathname === BASE) {
+      setTitle("Loans & Payments");
+    }
+  }, [location.pathname]);
 
   return (
     <>
@@ -57,7 +67,7 @@ const Layout = () => {
             noWrap
             sx={{ flexGrow: 1 }}
           >
-            Dashboard
+            {title}
           </Typography>
           <IconButton color="inherit">
             <ExitIcon />
@@ -83,13 +93,13 @@ const Layout = () => {
             <ListItemIcon>
               <DashboardIcon />
             </ListItemIcon>
-            <ListItemText primary="Loans" />
+            <ListItemText primary="Loans & Payments" />
           </ListItemButton>
           <ListItemButton onClick={handleClick(REQUESTS)}>
             <ListItemIcon>
               <PeopleIcon />
             </ListItemIcon>
-            <ListItemText primary="Requests" />
+            <ListItemText primary="Service Requests" />
           </ListItemButton>
         </List>
       </Drawer>
