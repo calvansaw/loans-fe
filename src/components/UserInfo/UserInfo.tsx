@@ -1,12 +1,14 @@
 import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
+import Alert from "@mui/material/Alert";
 import { AccountInterface } from "../../@types/account";
 
 interface UserInfoProps {
-  account?: AccountInterface;
+  account: AccountInterface | null;
+  isAdmin: boolean;
 }
 
-const UserInfo = ({ account }: UserInfoProps) => {
+const UserInfo = ({ account, isAdmin }: UserInfoProps) => {
   return (
     <Paper
       sx={{
@@ -16,15 +18,23 @@ const UserInfo = ({ account }: UserInfoProps) => {
         height: 240,
       }}
     >
-      <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
-        {account?.sub}
-      </Typography>
-      <Typography variant="h5" component="div">
-        {account?.name}
-      </Typography>
-      <Typography sx={{ mb: 1.5 }} color="text.secondary">
-        {account?.email}
-      </Typography>
+      {account ? (
+        <>
+          <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
+            {account?.sub}
+          </Typography>
+          <Typography variant="h5" component="div">
+            {account?.name}
+          </Typography>
+          <Typography sx={{ mb: 1.5 }} color="text.secondary">
+            {account?.email}
+          </Typography>{" "}
+        </>
+      ) : isAdmin ? (
+        <Alert severity="info">Select an account</Alert>
+      ) : (
+        <Alert severity="error">Account unavailable</Alert>
+      )}
     </Paper>
   );
 };

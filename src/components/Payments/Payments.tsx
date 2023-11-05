@@ -9,7 +9,7 @@ import moment from "moment";
 import { LOAN_TYPES } from "../../constants/loans";
 
 interface PaymentsProps {
-  rows: GridRowsProp;
+  rows?: GridRowsProp;
 }
 
 const columns: GridColDef[] = [
@@ -52,6 +52,7 @@ const columns: GridColDef[] = [
     type: "number",
     width: 100,
     disableColumnMenu: true,
+    valueGetter: (params: GridValueGetterParams) => params.value.toFixed(2),
   },
   {
     field: "currency",
@@ -92,10 +93,6 @@ const Payments = ({ rows = [] }: PaymentsProps) => {
               pageSize: 2,
             },
           },
-        }}
-        pageSizeOptions={[5]}
-        onRowClick={(params) => {
-          console.log(params);
         }}
       />
     </Box>

@@ -9,7 +9,13 @@ import "@fontsource/roboto/700.css";
 import { QueryClient, QueryClientProvider } from "react-query";
 
 const defaultTheme = createTheme();
-const queryClient = new QueryClient();
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      refetchOnWindowFocus: false, // default: true
+    },
+  },
+});
 
 function App() {
   return (

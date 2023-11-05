@@ -7,16 +7,30 @@ import Loans from "../Loans/Loans";
 import Payments from "../Payments/Payments";
 import { GET_LOANS } from "../../constants/query";
 import UserInfo from "../UserInfo/UserInfo";
+import useCheckLogin from "../../hooks/useCheckLogin";
+import { useEffect, useState } from "react";
+import { AccountInterface } from "../../@types/account";
 
 const Dashboard = () => {
+  const { isAdmin } = useCheckLogin();
   const { data } = useQuery(GET_LOANS, getLoans);
-  console.log("data: ", data?.data);
+  const [account, setAccount] = useState<AccountInterface | null>(null);
 
+  useEffect(() => {
+    if (!isAdmin) {
+      setAccount(data?.data?.list[0]);
+    } else {
+      setAccount(null);
+    }
+  }, [data, isAdmin]);
+
+  console.log("data: ", data?.data);
+  console.log("isAdmin: ", isAdmin);
   return (
     <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
       <Grid container spacing={3}>
         <Grid item xs={12} md={4} lg={4}>
-          <UserInfo account={data?.data?.list[0]} />
+          <UserInfo isAdmin={isAdmin} account={account} />
         </Grid>
         <Grid item xs={12} md={4} lg={8}>
           <Paper
@@ -27,12 +41,12 @@ const Dashboard = () => {
               height: 240,
             }}
           >
-            <Payments rows={data?.data?.list[0]?.payments} />
+            <Payments rows={account?.payments} />
           </Paper>
         </Grid>
         <Grid item xs={12}>
           <Paper sx={{ p: 2, display: "flex", flexDirection: "column" }}>
-            <Loans rows={data?.data.list[0]?.loans} />
+            <Loans rows={account?.loans} />
           </Paper>
         </Grid>
       </Grid>

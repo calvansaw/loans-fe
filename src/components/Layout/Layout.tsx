@@ -1,4 +1,4 @@
-import { Outlet } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -14,14 +14,20 @@ import MenuIcon from "@mui/icons-material/Menu";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import PeopleIcon from "@mui/icons-material/People";
-import useCheckLogin from "../../hooks/useCheckLogin";
+// import useCheckLogin from "../../hooks/useCheckLogin";
 import { AppBar, Drawer } from "./Layout.styles";
+import { BASE, REQUESTS } from "../../constants/routes";
 
 const Layout = () => {
-  useCheckLogin();
+  // useCheckLogin();
+  const navigate = useNavigate();
   const [open, setOpen] = useState(false);
   const toggleDrawer = () => {
     setOpen(!open);
+  };
+
+  const handleClick = (route: string) => () => {
+    navigate(route);
   };
 
   return (
@@ -73,13 +79,13 @@ const Layout = () => {
         </Toolbar>
         <Divider />
         <List component="nav">
-          <ListItemButton>
+          <ListItemButton onClick={handleClick(BASE)}>
             <ListItemIcon>
               <DashboardIcon />
             </ListItemIcon>
             <ListItemText primary="Loans" />
           </ListItemButton>
-          <ListItemButton>
+          <ListItemButton onClick={handleClick(REQUESTS)}>
             <ListItemIcon>
               <PeopleIcon />
             </ListItemIcon>

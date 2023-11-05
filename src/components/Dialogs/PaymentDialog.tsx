@@ -6,12 +6,15 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import Typography from "@mui/material/Typography";
+import CircularProgress from "@mui/material/CircularProgress";
+import IconButton from "@mui/material/IconButton";
+import CloseIcon from "@mui/icons-material/Close";
 import { useState } from "react";
 import { LoanInterface } from "../../@types/loan";
 import { useMutation, useQueryClient } from "react-query";
 import { updateLoan } from "../../services/loans";
 import { GET_LOANS } from "../../constants/query";
-import { CircularProgress } from "@mui/material";
+import { convertDecimal } from "../../helpers/utils";
 
 interface DialogProps {
   open: boolean;
@@ -19,8 +22,6 @@ interface DialogProps {
   data: LoanInterface;
   index: number;
 }
-
-const convertDecimal = (input: number) => parseFloat(input.toFixed(2));
 
 const PaymentDialog = ({ open, handleClose, data, index }: DialogProps) => {
   const queryClient = useQueryClient();
@@ -53,6 +54,18 @@ const PaymentDialog = ({ open, handleClose, data, index }: DialogProps) => {
     <>
       <Dialog open={open} onClose={handleClose}>
         <DialogTitle>Payment for loan</DialogTitle>
+        <IconButton
+          aria-label="close"
+          onClick={handleClose}
+          sx={{
+            position: "absolute",
+            right: 8,
+            top: 8,
+            color: (theme) => theme.palette.grey[500],
+          }}
+        >
+          <CloseIcon />
+        </IconButton>
         <DialogContent>
           <DialogContentText sx={{ pb: 3 }}>
             <Typography>

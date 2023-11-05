@@ -8,12 +8,13 @@ import {
 } from "@mui/x-data-grid";
 import moment from "moment";
 import { LOAN_TYPES } from "../../constants/loans";
-import PaymentDialog from "../PaymentDialog/PaymentDialog";
+import PaymentDialog from "../Dialogs/PaymentDialog";
 import { useState } from "react";
 import { LoanInterface } from "../../@types/loan";
+import { REQUEST_APPROVAL } from "../../constants/requests";
 
 interface LoansProps {
-  rows: GridRowsProp;
+  rows?: GridRowsProp;
 }
 
 const columns: GridColDef[] = [
@@ -56,6 +57,7 @@ const columns: GridColDef[] = [
     type: "number",
     width: 100,
     disableColumnMenu: true,
+    valueGetter: (params: GridValueGetterParams) => params.value.toFixed(2),
   },
   {
     field: "outstandingAmount",
@@ -63,6 +65,7 @@ const columns: GridColDef[] = [
     type: "number",
     width: 100,
     disableColumnMenu: true,
+    valueGetter: (params: GridValueGetterParams) => params.value.toFixed(2),
   },
   {
     field: "currency",
@@ -77,6 +80,7 @@ const columns: GridColDef[] = [
     type: "number",
     width: 70,
     disableColumnMenu: true,
+    valueGetter: (params: GridValueGetterParams) => params.value.toFixed(2),
   },
   {
     field: "redeemed",
@@ -119,9 +123,11 @@ const Loans = ({ rows = [] }: LoansProps) => {
   const [index, setIndex] = useState(-1);
 
   const handleOpen = (params: GridRowParams) => {
-    const rowIndex = rows.findIndex((r) => r.loanId === params.row.loanId);
-    setData(params.row);
-    setIndex(rowIndex);
+    if (params.row.loanApproval === REQUEST_APPROVAL.APPROVED) {
+      const rowIndex = rows.findIndex((r) => r.loanId === params.row.loanId);
+      setData(params.row);
+      setIndex(rowIndex);
+    }
   };
 
   const handleClose = () => {
