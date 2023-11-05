@@ -19,7 +19,7 @@ import { AppBar, Drawer } from "./Layout.styles";
 
 const Layout = () => {
   useCheckLogin();
-  const [open, setOpen] = useState(true);
+  const [open, setOpen] = useState(false);
   const toggleDrawer = () => {
     setOpen(!open);
   };

@@ -6,6 +6,7 @@ import { getLoans } from "../../services/loans";
 import Loans from "../Loans/Loans";
 import Payments from "../Payments/Payments";
 import { GET_LOANS } from "../../constants/query";
+import UserInfo from "../UserInfo/UserInfo";
 
 const Dashboard = () => {
   const { data } = useQuery(GET_LOANS, getLoans);
@@ -14,6 +15,9 @@ const Dashboard = () => {
   return (
     <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
       <Grid container spacing={3}>
+        <Grid item xs={12} md={4} lg={4}>
+          <UserInfo account={data?.data?.list[0]} />
+        </Grid>
         <Grid item xs={12} md={4} lg={8}>
           <Paper
             sx={{

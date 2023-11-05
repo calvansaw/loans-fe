@@ -7,7 +7,7 @@ import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import Typography from "@mui/material/Typography";
 import { useState } from "react";
-import { LoanInterface } from "../../@types/loans";
+import { LoanInterface } from "../../@types/loan";
 import { useMutation, useQueryClient } from "react-query";
 import { updateLoan } from "../../services/loans";
 import { GET_LOANS } from "../../constants/query";

@@ -10,7 +10,7 @@ import moment from "moment";
 import { LOAN_TYPES } from "../../constants/loans";
 import PaymentDialog from "../PaymentDialog/PaymentDialog";
 import { useState } from "react";
-import { LoanInterface } from "../../@types/loans";
+import { LoanInterface } from "../../@types/loan";
 
 interface LoansProps {
   rows: GridRowsProp;

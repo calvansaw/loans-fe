@@ -1,6 +1,6 @@
 import axios from "axios";
 import { BASE_API_URL } from "../constants/urls";
-import { UpdateLoanInterface } from "../@types/loans";
+import { UpdateLoanInterface } from "../@types/loan";
 
 export const getLoans = () => {
   return axios.get(`${BASE_API_URL}/loans`, {
