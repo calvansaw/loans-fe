@@ -159,7 +159,13 @@ const CreateLoanDialog = ({ open, handleClose }: CreateLoanDialogProps) => {
               <Controller
                 name="principalAmount"
                 control={control}
-                rules={{ required: "Principal amount is required" }}
+                rules={{
+                  required: "Principal amount is required",
+                  min: {
+                    value: 1,
+                    message: "Min. principal amount must be at least 1",
+                  },
+                }}
                 render={({ field, fieldState }) => (
                   <InputController
                     field={field}
@@ -174,7 +180,14 @@ const CreateLoanDialog = ({ open, handleClose }: CreateLoanDialogProps) => {
               <Controller
                 name="interestRate"
                 control={control}
-                rules={{ required: "Interest rate is required" }}
+                rules={{
+                  required: "Interest rate is required",
+                  validate: {
+                    positive: (v) =>
+                      convertDecimal(parseFloat(v)) > 0 ||
+                      "Interest rate must be more than 0",
+                  },
+                }}
                 render={({ field, fieldState }) => (
                   <InputController
                     field={field}

@@ -26,6 +26,7 @@ interface DialogProps {
 const PaymentDialog = ({ open, handleClose, data, index }: DialogProps) => {
   const queryClient = useQueryClient();
   const [amount, setAmount] = useState(0);
+  const [error, setError] = useState(false);
 
   const { mutate, isLoading } = useMutation(updateLoan, {
     onSuccess: () => {
@@ -40,14 +41,19 @@ const PaymentDialog = ({ open, handleClose, data, index }: DialogProps) => {
   };
 
   const handleConfirm = () => {
-    const newOutstandingAmt = data.outstandingAmount - amount;
-    const newLoanData = {
-      ...data,
-      outstandingAmount: newOutstandingAmt,
-      redeemed: newOutstandingAmt <= 0,
-    };
-    const payload = { index, paymentAmount: amount, loan: newLoanData };
-    mutate(payload);
+    if (amount > 0) {
+      setError(false);
+      const newOutstandingAmt = data.outstandingAmount - amount;
+      const newLoanData = {
+        ...data,
+        outstandingAmount: newOutstandingAmt,
+        redeemed: newOutstandingAmt <= 0,
+      };
+      const payload = { index, paymentAmount: amount, loan: newLoanData };
+      mutate(payload);
+    } else {
+      setError(true);
+    }
   };
 
   return (
@@ -80,8 +86,11 @@ const PaymentDialog = ({ open, handleClose, data, index }: DialogProps) => {
             variant="outlined"
             type="number"
             InputLabelProps={{ shrink: true }}
+            FormHelperTextProps={{ sx: { ml: 0 } }}
             value={amount}
             onChange={handleChange}
+            error={error}
+            helperText={error && "Payment amount must be more than 0"}
           />
         </DialogContent>
         <DialogActions>
