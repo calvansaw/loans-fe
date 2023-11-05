@@ -17,6 +17,7 @@ import PeopleIcon from "@mui/icons-material/People";
 // import useCheckLogin from "../../hooks/useCheckLogin";
 import { AppBar, Drawer } from "./Layout.styles";
 import { BASE, REQUESTS } from "../../constants/routes";
+import { LOGOUT_URL } from "../../constants/urls";
 
 const Layout = () => {
   // useCheckLogin();
@@ -69,7 +70,7 @@ const Layout = () => {
           >
             {title}
           </Typography>
-          <IconButton color="inherit">
+          <IconButton color="inherit" href={LOGOUT_URL}>
             <ExitIcon />
           </IconButton>
         </Toolbar>
