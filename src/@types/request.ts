@@ -18,3 +18,6 @@ export interface RequestInterface {
 export interface UpdateRequestInterface extends RequestInterface {
   requestApproval: string;
 }
+
+export interface CreateRequestInterface
+  extends Omit<RequestInterface, "sub" | "requestId"> {}
