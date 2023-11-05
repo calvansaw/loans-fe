@@ -123,7 +123,10 @@ const Loans = ({ rows = [] }: LoansProps) => {
   const [index, setIndex] = useState(-1);
 
   const handleOpen = (params: GridRowParams) => {
-    if (params.row.loanApproval === REQUEST_APPROVAL.APPROVED) {
+    if (
+      params.row.loanApproval === REQUEST_APPROVAL.APPROVED &&
+      !params.row.redeemed
+    ) {
       const rowIndex = rows.findIndex((r) => r.loanId === params.row.loanId);
       setData(params.row);
       setIndex(rowIndex);
