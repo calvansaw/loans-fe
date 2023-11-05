@@ -33,6 +33,11 @@ const Layout = () => {
     navigate(route);
   };
 
+  const handleLogout = () => {
+    localStorage.clear();
+    window.location.href = LOGOUT_URL;
+  };
+
   useEffect(() => {
     if (location.pathname === REQUESTS) {
       setTitle("Service Requests");
@@ -70,7 +75,7 @@ const Layout = () => {
           >
             {title}
           </Typography>
-          <IconButton color="inherit" href={LOGOUT_URL}>
+          <IconButton color="inherit" onClick={handleLogout}>
             <ExitIcon />
           </IconButton>
         </Toolbar>
