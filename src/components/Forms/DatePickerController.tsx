@@ -1,4 +1,5 @@
-import Input from "@mui/material/Input";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 import FormLabel from "@mui/material/FormLabel";
 import FormControl from "@mui/material/FormControl";
 import FormHelperText from "@mui/material/FormHelperText";
@@ -9,29 +10,32 @@ import {
   FieldValues,
 } from "react-hook-form";
 
-interface InputControllerProps<
+interface DatePickerControllerProps<
   TFieldValues extends FieldValues,
   TName extends FieldPath<TFieldValues>
 > {
   field: ControllerRenderProps<TFieldValues, TName>;
   fieldState: ControllerFieldState;
   label: string;
-  type?: string;
 }
 
-const InputController = <
+const DatePickerController = <
   TFieldValues extends FieldValues,
   TName extends FieldPath<TFieldValues>
 >({
   field,
   fieldState,
   label,
-  type = "text",
-}: InputControllerProps<TFieldValues, TName>) => {
+}: DatePickerControllerProps<TFieldValues, TName>) => {
   return (
     <FormControl fullWidth error={fieldState.invalid}>
       <FormLabel>{label}</FormLabel>
-      <Input fullWidth type={type} placeholder={`Enter ${label}`} {...field} />
+      <DatePicker
+        placeholderText="Select date"
+        dateFormat="dd/MM/yyyy"
+        onChange={(date) => field.onChange(date)}
+        selected={field.value}
+      />
       <FormHelperText sx={{ ml: 0 }}>
         {fieldState.error?.message}
       </FormHelperText>
@@ -39,4 +43,4 @@ const InputController = <
   );
 };
 
-export default InputController;
+export default DatePickerController;
