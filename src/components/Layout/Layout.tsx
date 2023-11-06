@@ -18,6 +18,7 @@ import PeopleIcon from "@mui/icons-material/People";
 import { AppBar, Drawer } from "./Layout.styles";
 import { BASE, REQUESTS } from "../../constants/routes";
 import { LOGOUT_URL } from "../../constants/urls";
+import { revoke } from "../../services/auth";
 
 const Layout = () => {
   // useCheckLogin();
@@ -33,9 +34,16 @@ const Layout = () => {
     navigate(route);
   };
 
-  const handleLogout = () => {
-    localStorage.clear();
-    window.location.href = LOGOUT_URL;
+  const handleLogout = async () => {
+    try {
+      await revoke();
+      localStorage.clear();
+      window.location.href = LOGOUT_URL;
+    } catch (err) {
+      console.log(err);
+      localStorage.clear();
+      window.location.href = LOGOUT_URL;
+    }
   };
 
   useEffect(() => {
