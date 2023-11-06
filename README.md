@@ -1,3 +1,34 @@
+# Application guide
+
+Roles: Bank Admin, Applicant
+
+Applicant:
+- As an applicant, I can submit request to create an account.
+- As an applicant, I can submit request to create a new loan of types (Home Loan, Car Loan, Study Loan) in 2 different currencies (SGD, USD).
+- As an applicant, I can make repayments of my own loan, that has been APPROVED and has not yet been redeemed.
+- As an applicant, I can view my own payment history.
+- As an applicant, I can view the list of my own loans, including rejected loan requests.
+- As an applicant, I can view the total of my loans, by loan types, by currencies.
+
+In Service Requests page, click on the respective buttons above the tables to create account, create loan, respectively.
+In Loans & Payments page, click on the respective row of the loan table at the bottom to make repayments.
+
+
+Bank Admin:
+- As a bank admin, I can approve/reject an applicant's request to create an account, if the account does not yet exists.
+- As a bank admin, I can approve/reject an applicant's request to create a loan, if the applicant already has an existing account.
+- As a bank admin, I can view the list of requests across all applicants, by requests type (Create Account, Create Loan).
+- As a bank admin, I can view the list of loans across all applicants.
+- As a bank admin, I can view the list of payments across all applicants.
+- As a bank admin, I can view the loan total of an applicant by loan types, by currencies.
+
+In Service Requests page, click on the respective row of either the create account request table or the create loan request table to approve/reject a request.
+In Loans & Payments page, click on the respective row of the account table on the right to view the applicant's loan totals.
+
+username: saw
+password: qwertyui
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
